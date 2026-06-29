@@ -1,0 +1,23 @@
+### Create a transaction
+POST http://localhost:8080/transactions
+Content-Type: application/json
+
+{
+  "amount": 2500.00,
+  "category": "Salary",
+  "description": "June pay",
+  "date": "2026-06-29",
+  "type": "INCOME"
+}
+
+### Get all transactions
+GET http://localhost:8080/transactions
+
+### Get summary
+GET http://localhost:8080/transactions/summary
+
+### Get by ID (change the number)
+GET http://localhost:8080/transactions/1
+
+### Delete by ID (change the number)
+DELETE http://localhost:8080/transactions/1
