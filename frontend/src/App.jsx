@@ -1,8 +1,21 @@
+import { useState } from 'react'
 import TransactionForm from './components/TransactionForm'
+import TransactionList from './components/TransactionList'
+import SummaryBar from './components/SummaryBar'
 
 function App() {
+    const [transactions, setTransactions] = useState([])
+
     const handleAddTransaction = (transaction) => {
-        console.log('New transaction:', transaction)
+        const newTransaction = {
+            ...transaction,
+            id: Date.now(),
+        }
+        setTransactions([newTransaction, ...transactions])
+    }
+
+    const handleDeleteTransaction = (id) => {
+        setTransactions(transactions.filter((t) => t.id !== id))
     }
 
     return (
@@ -11,8 +24,13 @@ function App() {
                 Personal Finance Dashboard
             </h1>
 
-            <div className="max-w-4xl mx-auto px-4">
+            <div className="max-w-4xl mx-auto px-4 space-y-6">
+                <SummaryBar transactions={transactions} />
                 <TransactionForm onAddTransaction={handleAddTransaction} />
+                <TransactionList
+                    transactions={transactions}
+                    onDeleteTransaction={handleDeleteTransaction}
+                    />
             </div>
         </div>
     )
